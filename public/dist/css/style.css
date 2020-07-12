@@ -1,0 +1,154 @@
+html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+            .full-height {
+                height: 100vh;
+            }
+            
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .position-ref {
+                position: relative;
+            }
+
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+            .top-left {
+                position: absolute;
+                left: 10px;
+                top: 18px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .title {
+                font-size: 84px;
+            }
+
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+            /* .links > a:hover {
+                color: #636b6f;
+                font-family: "Palatino Linotype", serif;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            } */
+
+            .SpecAppnavBarre{
+                opacity: 0.85;
+            }
+            .SpecAppnavBarreOut{
+                opacity:unset;
+            }
+
+            .AppSecplinks > a {
+                color:#fff;
+                padding: 0 25px;
+                font-family: "Arial black";
+                font-size: 20px;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px #000;
+            }
+            .AppSecplinks > a:hover {
+                color: #ff9900;
+                padding: 0 25px;
+                font-family: "Arial black";
+                font-size: 20px;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgb(252, 154, 8);
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+            .specAppTitleBlue {
+                text-transform: normal;
+                font-family: "Arial black";
+                font-weight: 400;
+                color:#327cf3;
+                font-size: 84px;
+                text-shadow: 2px 2px 4px #000;
+            }
+            .specAppTitleOrange {
+                text-transform: normal;
+                font-family: "Arial black";
+                font-weight: 400;
+                color:#ff9900;
+                font-size: 84px;
+                text-shadow: 2px 2px 4px #000;
+            }
+            .specAppSmallTitleBlue {
+                text-transform: normal;
+                font-family: "Arial black";
+                font-weight: 400;
+                color:#327cf3;
+                font-size: 20px;
+                text-shadow: 1px 1px 2px #000;
+            }
+            .specAppSmallTitleOrange {
+                text-transform: normal;
+                font-family: "Arial black";
+                font-weight: 400;
+                color:#ff9900;
+                font-size: 20px;
+                text-shadow: 1px 1px 2px #000;
+            }
+            .specAppDescript {
+                text-transform:italic;
+                font-family: cursive;
+                color:rgb(248, 237, 135);
+                margin:100px 0 -50px 0;
+                font-size: 17px;
+                text-decoration: none;
+                text-shadow: 1px 1px 2px #000;
+            }
+            .specAppCopyRight {
+               
+                position: relative;
+                text-align: center;
+                text-transform:italic;
+                font-family: serif;
+                color:#fff;
+                font-size: 11px;
+                text-decoration: none;
+                width: 100%;
+                top:-25px;
+                text-shadow: 1px 1px 2px #000;
+        }
+        
+        .AppConnect{
+           box-shadow: 5px 10px 5px 2px rgba(0, 0, 0, .4);
+           margin-bottom:25px;
+        }
+        
