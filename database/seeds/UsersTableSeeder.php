@@ -65,7 +65,7 @@ class UsersTableSeeder extends Seeder
         
 		
 		 /* invite de l'application dans une agence  */
-        $operateur = User::create([
+        $invite = User::create([
             'civility'=>3,
             'name'=>'Opérateur', 
             'firstname'=>'app',
