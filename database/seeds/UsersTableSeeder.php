@@ -63,17 +63,31 @@ class UsersTableSeeder extends Seeder
             'status'=>1, 
         ]);
         
+		
+		 /* invite de l'application dans une agence  */
+        $operateur = User::create([
+            'civility'=>3,
+            'name'=>'Opérateur', 
+            'firstname'=>'app',
+            'email'=>'invite@movision.com', 
+            'password'=>Hash::make('invite'),
+            'status'=>0, 
+        ]);
+		
+		
         //Recuperartion des roles créés
         $superadminRole = Role::where('name','Super Admin')->first();
         $adminRole = Role::where('name','Admin')->first();
         $superviseurRole = Role::where('name','Superviseur')->first();
         $operateurRole = Role::where('name','Opérateur')->first();
+        $inviteRole = Role::where('name','Invité')->first();
 
         //Affectation des roles créés aux variables liées
         $superadmin->roles()->attach($superadminRole);
         $admin->roles()->attach($adminRole);
         $superviseur->roles()->attach($superviseurRole);
         $operateur->roles()->attach($operateurRole);
+        $invite->roles()->attach($inviteRole);
 
     }
 }
