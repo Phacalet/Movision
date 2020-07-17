@@ -20,13 +20,30 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'HomeController@loged')->name('dashboard');
-Route::get('/country', 'HomeController@located')->name('country');
 
-/* Route::get('/dashboard', 'HomeController@loged')->name('dashboard');
-Route::get('/dashboard', 'HomeController@loged')->name('dashboard');
-Route::get('/dashboard', 'HomeController@loged')->name('dashboard');
-Route::get('/dashboard', 'HomeController@loged')->name('dashboard'); */
+
+Route::get('/dashboard1', 'HomeController@loged')->name('dashboard1');
+Route::get('/dashboard2', 'HomeController@loged')->name('dashboard2');
+Route::get('/dashboard3', 'HomeController@loged')->name('dashboard3');
+
+
+Route::get('/country', 'HomeController@located')->name('country');
+Route::get('/team', 'HomeController@loged')->name('team');
+Route::get('/pos', 'HomeController@loged')->name('pos'); 
+Route::get('/profile', 'HomeController@loged')->name('profile'); 
+
+
+Route::get('/customer', 'HomeController@loged')->name('customer');
+Route::get('/pack', 'HomeController@loged')->name('pack');
+Route::get('/shipping', 'HomeController@loged')->name('shipping');
+Route::get('/message', 'HomeController@loged')->name('message');
+Route::get('/package', 'HomeController@loged')->name('package');
+Route::get('/shippingWay', 'HomeController@loged')->name('shippingWay'); 
+Route::get('/alert', 'HomeController@loged')->name('alert');
+Route::get('/calendar', 'HomeController@loged')->name('calendar');
+Route::get('/help', 'HomeController@loged')->name('help');
+
+
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function()
 {

@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'firstname' => 'required|string|min:3|max:225',  
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8,confirmed', 
+            
         ]);
     }
     
@@ -74,10 +75,11 @@ class RegisterController extends Controller
             'firstname' => $data['firstname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'status' => 1,
+            'status' => 0,
         ]); 
  
-     /* dd($user ); */
+      dd($user );
+      exit();
      $role = Role::Select('id')->where('name','Opérateur')->first();
         
         $user->roles()->attach($role);

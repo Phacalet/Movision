@@ -6242,9 +6242,9 @@ __webpack_require__.r(__webpack_exports__);
   };
   var ClassName$a = {
     FADE: 'fade',
-    HIDE: 'hide',
-    SHOW: 'show',
-    SHOWING: 'showing'
+    HIDE: 'Cacher',
+    SHOW: 'Affiche',
+    SHOWING: 'Affichage'
   };
   var DefaultType$7 = {
     animation: 'boolean',

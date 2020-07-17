@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
 		 /* invite de l'application dans une agence  */
         $invite = User::create([
             'civility'=>3,
-            'name'=>'Opérateur', 
+            'name'=>'Invité', 
             'firstname'=>'app',
             'email'=>'invite@movision.com', 
             'password'=>Hash::make('invite'),

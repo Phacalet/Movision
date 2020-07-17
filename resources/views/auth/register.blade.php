@@ -18,7 +18,7 @@
     <div class="card-header text-center card-title txtMaj">{{ __(':: Créer un compte utilisateur  ::') }}</div> 
 
                 <div class="login-card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data"  >
                         @csrf
                       <div class="row">
                        <div class="col-md-6 form-group"> 
@@ -47,7 +47,7 @@
                        <div class="col-md-6">
                        <div class="input-group">
                           <div class="custom-file">
-                            <input tableindex=2 type="file" class="custom-file-input" id="exampleInputFile">
+                            <input tableindex=2 type="file" name="picture" value="picture" class="custom-file-input" id="picture" >
                             <label class="custom-file-label" for="exampleInputFile">Choisir image</label>
                           </div>
                           <div class="input-group-append">
@@ -70,7 +70,7 @@
                       <div class="row">
                        <div class="col-md-6"> 
                         <div class="input-group mt-4">
-                            <input tableindex=3 placeholder="Nom" id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" >
+                            <input tableindex=3 placeholder="Nom" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" >
                               <div class="input-group-append">
                                 <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -85,7 +85,7 @@
 
                         </div>
                        <div class="col-md-6 input-group mt-4">
-                            <input tableindex=4 placeholder="Prénom" id="firstname" type="firstname" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="firstname" >
+                            <input tableindex=4 placeholder="Prénom" id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="firstname" >
                               <div class="input-group-append">
                                 <div class="input-group-text">
                                 <span class="fas fa-user"></span>

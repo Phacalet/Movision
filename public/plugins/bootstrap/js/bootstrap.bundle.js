@@ -6917,7 +6917,7 @@
     FADE: 'fade',
     HIDE: 'hide',
     SHOW: 'show',
-    SHOWING: 'showing'
+    SHOWING: 'Affichage'
   };
   var DefaultType$7 = {
     animation: 'boolean',
