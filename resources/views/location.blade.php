@@ -2,8 +2,10 @@
 
 
 
+@php $page['title']='Gestion des Pays/Villes'; $page['module']='Statistiques';  @endphp
 @section('title')
- <title> Movision 4.0 |> Gestion des Pays/Villes  </title>
+  
+ <title> Movision 4.0 | {{$page['title']}} </title>
 @endsection
 
 

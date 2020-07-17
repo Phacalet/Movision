@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 
+@php $page['title']='Modifier un compte utilisateur'; $page['module']='users';  @endphp
+@section('title')
+  
+ <title> Movision 4.0 | {{$page['title']}} </title>
+ @endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

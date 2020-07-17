@@ -164,9 +164,24 @@
 
                         <div class="row mt-5">
                             <div class="col-md-12 text-center">
-                                <button tableindex=9 type="submit" class="btn btn-primary">
+                                <button tableindex=9 type="submit" class="btn btn-primary" >
                                     {{ __('Créer maintenant !') }}
                                 </button>
+
+                                @if(session()->has('message'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
+                                          
+                                      </div>
+                            
+                                  </div>
+                              </div>
+                          </div>
+
+
+
                             </div>
                         </div>
                     </form>

@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function loged()
     {
-        return view('dashboard');
+        return view('dashboard1');
     }
 
     public function located()

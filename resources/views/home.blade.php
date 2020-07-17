@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 
 
+@php $page['title']='Tableau de bord'; $page['module']='Statistiques';  @endphp
 @section('title')
- <title> Movision 4.0 |> Tableau de bord  </title>
+  
+ <title> Movision 4.0 | {{$page['title']}} </title>
 @endsection
 
 
@@ -12,12 +14,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Activité globale</h1>
+          <h1 class="m-0 text-dark">Statistiques Globales</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-            <li class="breadcrumb-item active">Vision globale</li>
+            <li class="breadcrumb-item active">{{$page['title']}}</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->

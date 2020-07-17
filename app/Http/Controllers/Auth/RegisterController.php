@@ -78,13 +78,13 @@ class RegisterController extends Controller
             'status' => 0,
         ]); 
  
-      dd($user );
-      exit();
-     $role = Role::Select('id')->where('name','Opérateur')->first();
+        /* dd($user );
+        exit(); */
+        $role = Role::Select('id')->where('name','Invité')->first();
         
         $user->roles()->attach($role);
-
-        return $user; 
+        return $user;
+      //  return redirect()->back()->with('message', 'IT WORKS!');; 
         
     }
 }
