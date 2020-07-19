@@ -2,13 +2,13 @@
 
 
 
-@php $page['title']='Gestion des Pays/Villes'; $page['module']='Statistiques';  @endphp
+@php $page['title']='Paramétrage des Pays/Villes'; $page['module']='Statistiques';  @endphp
 @section('title')
   
  <title> Movision 4.0 | {{$page['title']}} </title>
 @endsection
 
-
+@include('flash-message')
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -20,7 +20,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/home">Accueil</a></li>
-              <li class="breadcrumb-item active">Paramétrage Pays/Villes</li>
+              <li class="breadcrumb-item active">{{$page['title']}}</li>
             </ol>
           </div>
         </div>
@@ -54,29 +54,52 @@
                 <table class="table m-0">
                     <thead>
                     <tr>
-                      <th>N° d'ordre</th>
+                      <th>N°</th>
                       <th>Pays</th>
-                      <th>Status</th>
-                      <th>Date d'ajout</th>
+                      <th>Statut</th>
+                     <!--  <th>Date d'ajout</th> -->
+                      <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+
+                    @foreach($countries as $country)
                     <tr>
-                      <td><a href="#">1</a></td>
-                      <td>France</td>
-                      <td><span class="badge badge-success">Actif</span></td>
-                      <td>12/07/2020</td>
+                      <td><a href="#">{{$country->id}}</a></td>
+                      <td>{{$country->name}}</td>
+                      <td class="text-center"><?= ($country->status==1) ? '<span class="badge badge-success">Actif</span>' :'<span class="badge badge-danger">Inactif</span>' ?></td>
+                      <!-- <td class="text-center">{{$country->created_at->diffForHumans()}}</td> -->
+                      <td class="text-center">
+                      <a href="{{ route('country.show', $country->id)}}" alt="Voir les details du pays"><i class="fas fa-eye mr-2" title="Plus de détails" ></i> </a>
+                       
+                                    <a href="{{ route('country.edit', $country->id)}}" alt="Modifier les infos"><i class="fas fa-pen mr-2" title="Modifier" ></i> </a> 
+                         
+
+                         
+                          <form action="{{ route('country.destroy', $country->id)}}" method="POST"  class="d-inline" > 
+                            @csrf
+                            @method('DELETE') 
+                            <a href="{{ route('country.destroy', $country->id)}}" alt="Supprimer le pays" class="" ><i class="fas fa-trash" title="Supprimer" ></i> </a> 
+                          </form>
+                       
+                      </td>
                     </tr>
+                    @endforeach
+
+                
                     </tbody>
                   </table>
                 </div>
                 <!-- /.table-responsive -->
               </div>
               <!-- /.card-body -->
-              <form method="POST" action="" enctype="multipart/form-data" >
-              @csrf
+              
               <div class="card-footer clearfix">
                 <a href="javascript:void(0)" class="btn btn-sm btn-info float-left"  data-target="#modal_AddCountry" data-toggle="modal">Ajouter un Pays</a>
+            
+             <form method="POST" action="{{ route('country') }}" enctype="multipart/form-data" >
+              @csrf
+                
                 <div class="modal fade" id="modal_AddCountry" tabindex="-1" role="dialog" aria-labelledby="AddCountryModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -94,8 +117,8 @@
 
                         <div class="form-group">
                           
-                            <input id="country" placeholder="Nom du Pays"  type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required autocomplete="country" autofocus>
-                                @error('country')
+                            <input id="name" placeholder="Nom du Pays"  type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -104,18 +127,21 @@
                        
 					 
 					   
-                        <div class="form-group clearfix">
-                        <div class="icheck-primary d-inline">
-                        <input type="checkbox" id="status" name="status" checked="">
-                        @error('status')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                        <label for="status">Actif</label>
-                       </div>
-                         </div>
-					              
+                      <div class="form-group clearfix">
+                      
+                      <div class="icheck-primary d-inline mr-4">
+                        <input type="radio" id="status1" value=1 name="status" required>
+                        <label for="status1">Actif
+                        </label>
+                      </div>
+                      <div class="icheck-danger d-inline">
+                        <input type="radio" id="status2" value=0 name="status" checked >
+                        <label for="status2">Inactif
+                        </label>
+                      </div>
+                   
+                      </div>
+					             <!--  
                         <div>
                         <p></p>
                          <center><strong>{{ __('   --------   OU   ---------   ') }}</strong></center> 
@@ -130,10 +156,10 @@
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text" id="">Charger</span>
-                      </div>
+                      </div> 
                    
                    
-                  </div>
+                  </div>-->
                   </div>
                 <!-- /.card-body -->
 
@@ -142,12 +168,14 @@
 
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-primary">Enregistrer</button>
+                        <button type="reset" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                       </div>
                     </div>
                   </div>
                 </div>
+                </form>
+
                 
                 <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Voir tous les Pays</a>
               </div>
@@ -155,7 +183,7 @@
               <!-- /.card-footer -->
            </div>
         </div>
-        </form>
+      
           <!-- /.modal-content -->
         
         
@@ -184,7 +212,7 @@
                       <th>N° d'ordre</th>
                       <th>Pays</th>
                       <th>Villes</th>
-                      <th>Status</th>
+                      <th>Statut</th>
                       <th>Date d'ajout</th>
                     </tr>
                     </thead>

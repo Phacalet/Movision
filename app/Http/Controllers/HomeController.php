@@ -31,9 +31,4 @@ class HomeController extends Controller
         return view('dashboard1');
     }
 
-    public function located()
-    {
-        return view('location');
-    }
-
 }

@@ -78,7 +78,7 @@ class UserController extends Controller
     {   
 
        if (Gate::denies('manage-users')) {
-          return redirect()->route('admin.users.index');
+          return redirect()->route('admin.users.index')->with('warning','Vous n\'êtes pas habilité à paramétrer les utilisateurs !');
        }
 
         $roles = Role::all();
@@ -92,8 +92,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -111,7 +111,7 @@ class UserController extends Controller
        $user->status = $request->status;  */
 
        $user->save();
-       return redirect()->route('admin.users.index');
+       return redirect()->route('admin.users.index')->with('success','Modification pris en compte !');
     }
 
     /**
@@ -130,6 +130,6 @@ class UserController extends Controller
         //
         $user->roles()->detach();
         $user->delete();
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('danger','Suppression effectuée avec succès !');
     }
 }

@@ -7,7 +7,7 @@
  <title> Movision 4.0 | {{$page['title']}} </title>
 @endsection
 
-
+@include('flash-message')
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">

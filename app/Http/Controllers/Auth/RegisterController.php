@@ -31,8 +31,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
+     // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/register';
     /**
      * Create a new controller instance.
      *
@@ -69,22 +69,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        return $user = User::create([
             'civility' => $data['civility'],
             'name' => $data['name'],
             'firstname' => $data['firstname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'status' => 0,
-        ]); 
+        ]);
  
         /* dd($user );
         exit(); */
         $role = Role::Select('id')->where('name','Invité')->first();
         
         $user->roles()->attach($role);
-        return $user;
-      //  return redirect()->back()->with('message', 'IT WORKS!');; 
+        
+        return back()->with('success','Votre compte a été créé avec succès !');
+        
         
     }
 }

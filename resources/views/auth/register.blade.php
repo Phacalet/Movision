@@ -1,10 +1,13 @@
 @extends('layouts.log')
 
 
+@php $page['title']='Inscription: Création de compte utilisateur'; $page['module']='Gestion des utilisateur';  @endphp
 @section('title')
- <title> Movision 4.0 |> Créer un compte utilisateur </title>
+  
+ <title> Movision 4.0 | {{$page['title']}} </title>
 @endsection
 
+@include('flash-message')
 
 @section('content')
 <body class="hold-transition login-page bg">
