@@ -46,8 +46,6 @@ class LoginController extends Controller
             'unlock'
         ]);
     
-       
-     Session::put('userPic',"/dist/img/". Auth::user()->photo_url); 
          
     }
 
