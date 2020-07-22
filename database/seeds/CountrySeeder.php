@@ -24,11 +24,12 @@ class CountrySeeder extends Seeder
             'country_id'=>1,
             'name'=>'France',
             'status'=>1, 
-            
+            'zone_1'=>'App data',
             'user_id'=>1,
         ]);
 
         $ci= Country::create([
+            'country_id'=>1,
             'name'=>'Côte d\'Ivoire',
             'status'=>1, 
             'zone_1'=>'App data',
