@@ -21,7 +21,7 @@ class CountrySeeder extends Seeder
         //Pays livrés par defaut avec l'application
         /* Le super admin */
         $france= Country::create([
-            'coutry_id'=>1,
+            'country_id'=>1,
             'name'=>'France',
             'status'=>1, 
             
