@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-
+  
   @yield('title')
-
+   
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -87,8 +87,8 @@
     <!-- Login panel -->
     <li class="nav-item dropdown user user-menu">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> 
-        <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image img-circle elevation-2" alt="User Image"> 
-      <span class="d-none d-md-block float-right">Hyacinthe AGO</span> 
+        <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="user-image img-circle elevation-2" alt="User Image"> 
+      <span class="d-none d-md-block float-right">{{{ isset(Auth::user()->name) ? Auth::user()->firtsname.' '.Auth::user()->name : Auth::user()->email }}}</span> 
     </a>
     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <!-- User image -->
@@ -258,7 +258,7 @@
             </a>
             <ul class="nav nav-treeview">
                <li class="nav-item">
-                <a href="{{ route('country') }}" class="nav-link">
+                <a href="{{ route('country.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pays/ville</p>
                 </a>
@@ -322,7 +322,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
-
+    @include('flash-message')
     @yield('content')
 
 
@@ -403,7 +403,5 @@
     } );
    } );
 </script>
-
-
 </body>
 </html>

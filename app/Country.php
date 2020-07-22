@@ -8,7 +8,9 @@ class Country extends Model
 {
     //
 
-    protected $fillable = [
-       'name','status',
-     ];
+    protected $guarded = [];
+
+     public function cities(){ 
+      return $this->hasMany(City::class);
+     }
 }

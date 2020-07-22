@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use  App\Http\Controllers\Auth\Session;
+
+
 
 class LoginController extends Controller
 {
@@ -42,6 +45,10 @@ class LoginController extends Controller
             'locked',
             'unlock'
         ]);
+    
+       
+     Session::put('userPic',"/dist/img/". Auth::user()->photo_url); 
+         
     }
 
     protected function redirectTo()
@@ -60,9 +67,10 @@ class LoginController extends Controller
       if (Auth::User()->getLockoutTime() > 0) {
          session(['lock-expires-at' => now()->addMinutes(Auth::User()->User()->getLockoutTime())]);
       }
-          
+     
            return '/home';
       /*  } */
+            
     }
 
 

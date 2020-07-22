@@ -1,12 +1,12 @@
 <?php
 
-
 namespace App\Http\Controllers;
+use App\City;
 use App\Country;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
 
 class CountryController extends Controller
 {
@@ -16,28 +16,18 @@ class CountryController extends Controller
      * @return void
      * 
      */
-    protected $redirectTo = '/country';
-
 
     public function __construct()
     {
-        $this->middleware('auth');
-/* 
-        if (Gate::denies('manage-users')) {
-            return redirect()->route('location')->with('Warning','Vous n\'êtes pas habilité à paramétrer les pays !');
-        } */
-
-
-        
+        $this->middleware('auth'); 
     }
 
-   /**
+    /**
      * Get a validator for an incoming keyin request.
-     *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
-     */ 
-    protected function validator(array $data)
+    */ 
+    protected function validator(Request $data)
     {
         return Validator::make($data, [  
             'name' =>'required|string|min:3|max:225',
@@ -45,19 +35,22 @@ class CountryController extends Controller
         ]);
     }
 
-  /**
+
+
+     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
         \Carbon\Carbon::setLocale('fr');
+        $cities = City::with('country')->get();
         $countries = Country::all();
-        return view('location')->with('countries',$countries);
+
+        return view('location')->with('countries',$countries)->with('cities',$cities);
     }
     
+
     /**
      * Create a new country instance after a valid registration.
      * @param  array  $data
@@ -65,9 +58,9 @@ class CountryController extends Controller
      */
     protected function create(Request $data)
     {
-      //  $userId = Auth::id();  
-      $userId = 1;
-       $country = Country::create([
+     //  $userId = Auth::id();  
+        $userId = 1;
+        $country = Country::create([
             'name' => $data['name'],
             'status' => $data['status'],
             'zone_1'=>'App data',
@@ -75,24 +68,34 @@ class CountryController extends Controller
         ]);
         //return redirect()->back()->with('success',$data['name'].' a été ajouté à la liste des pays !');
          return redirect('country');
-       }
-
-
+    }
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
+        $request->validate(
+            ['name'=>'required|min:3'],
+            ['name.required'=>'Le champs pays est obligatoire', 'name.min'=>'Vous devez saisir 3 caractères au moins']
+        );
+
+        Country::create([
+            'name' => $request->name,
+            'status' => $request->status,
+            'zone_1'=>'App data',
+            'user_id'=>auth()->id(),]
+        );
+        return redirect('country')->with('success',$request['name'].' a été ajouté à la liste des pays !');
     }
+
+
 
     /**
      * Display the specified resource.
-     *
      * @param  \App\Country $country
      * @return \Illuminate\Http\Response
      */
@@ -101,9 +104,9 @@ class CountryController extends Controller
         //
     }
 
+
     /**
      * Show the form for editing the specified resource.
-     *
      * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
@@ -111,17 +114,17 @@ class CountryController extends Controller
     {   
         //
         return view('country.edit',[
-            'name'=>$name,
-            'status'=>$status,
-            'user_id'=>$user_id,
-            'zone_1'=>$zone_1
+            'name'=>$country->name,
+            'status'=>$country->status,
+            'user_id'=>$country->user_id,
+            'zone_1'=>$country->zone_1
         ]);
         
     }
 
+
     /**
      * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Country $country
      * @return \Illuminate\Http\Response
@@ -146,11 +149,8 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         
-       if (Gate::denies('delete-country')) {
-        return redirect()->route('country.index');
-       }
-
+       
         $country->delete();
-        return redirect()->route('country.index')->with('danger','Suppression effectuée avec succès !');
+        return redirect()->back()->with('danger','Suppression effectuée avec succès !');
     }
 }
