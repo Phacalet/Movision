@@ -18,7 +18,7 @@ class CreateCountryTable extends Migration
             $table->string('name');
             $table->boolean('status');
             $table->string('zone_1')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }

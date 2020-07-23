@@ -87,13 +87,13 @@
     <!-- Login panel -->
     <li class="nav-item dropdown user user-menu">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> 
-        <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="user-image img-circle elevation-2" alt="User Image"> 
+        <img src="{{{ isset(Auth::user()->photo_url) ? Auth::user()->photo_url : 'dist/img/no-image-icon-hi-1.png' }}}" class="user-image img-circle elevation-2" alt="{{{ isset(Auth::user()->name) ? Auth::user()->firtsname.' '.Auth::user()->name : Auth::user()->email }}}"> 
       <span class="d-none d-md-block float-right">{{{ isset(Auth::user()->name) ? Auth::user()->firtsname.' '.Auth::user()->name : Auth::user()->email }}}</span> 
     </a>
     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <!-- User image -->
       <li class="user-header bg-primary">
-        <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+        <img src="{{{ isset(Auth::user()->photo_url) ? Auth::user()->photo_url : 'dist/img/no-image-icon-hi-1.png' }}}" class="img-circle elevation-2" alt="{{{ isset(Auth::user()->name) ? Auth::user()->firtsname.' '.Auth::user()->name : Auth::user()->email }}}">
 
         <p>
           Hyacinthe AGO - Web Developer

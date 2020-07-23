@@ -30,7 +30,8 @@ class UsersTableSeeder extends Seeder
             'firstname'=>'app',
             'email'=>'admin@full-it.com', 
             'password'=>Hash::make('azerty1234*'),
-            'status'=>1, 
+            'photo_url' => 'dist/img/user2-160x160.jpg',
+            'status'=>1 
         ]);
 
         /* Le administrateur de l'application  */
@@ -40,7 +41,7 @@ class UsersTableSeeder extends Seeder
             'firstname'=>'app',
             'email'=>'admin@movision.com', 
             'password'=>Hash::make('password'),
-            'status'=>1, 
+            'status'=>1
         ]);
 
         /* Le chef d'une agence  */

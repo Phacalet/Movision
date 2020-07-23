@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\City;
 
 class CitySeeder extends Seeder
@@ -27,8 +28,7 @@ class CitySeeder extends Seeder
             'user_id'=>1,
             'name'=>'Paris',
             'status'=>1, 
-            'zone_1'=>'App data',
-            
+            'zone_1'=>'App data'          
         ]);
 
         $Abidjan= City::create([
@@ -36,7 +36,7 @@ class CitySeeder extends Seeder
             'user_id'=>1,
             'name'=>'Abidjan',
             'status'=>1, 
-            'zone_1'=>'App data',
+            'zone_1'=>'App data'
         ]);
     }
 }
