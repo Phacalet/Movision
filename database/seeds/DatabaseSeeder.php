@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,15 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       /* Respecter la hierrarchie des tables mères avant filles*/
-        /*  $this->call(RolesTableSeeder::class);
-            $this->call(UsersTableSeeder::class); */
 
+        Schema::disableForeignKeyConstraints();
+        
         $this->call([
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             CountrySeeder::class,
             CitySeeder::class
         ]);
+
+        Schema::enableForeignKeyConstraints();
+
     }
 }

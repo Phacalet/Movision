@@ -1,8 +1,19 @@
 @extends('layouts.log')
 
 
+@php 
+  $page['title']='Connexion'; 
+  $page['module']='Authentification'; 
+  $page['imgPath']='dist/img/';
+  $page['appVersion']='4.0'; 
+  $page['appPoweredBy']='FULL-IT'; 
+  $page['appPoweredByWebsite']="http://full-it.com";
+  $page['appLongName']='MO\'FTVISION'; 
+  $page['appName']='Movision';
+@endphp
+
 @section('title')
- <title> Movision 4.0 | Connexion  </title>
+<title> {{$page['appName'].' '.$page['appVersion']}} | {{$page['title']}} </title>
 @endsection
 
 
@@ -11,7 +22,7 @@
 <img src="{{ asset('dist/img/logo_mofret.png') }}" alt="logo" class="top-left">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ asset('/') }}"><b class="specAppSmallTitleBlue">MO'FTS</b><span class="specAppSmallTitleOrange">VISION</span></a>
+    <a href="{{ asset('/') }}"><b class="specAppSmallTitleBlue">{{ Str::of($page['appLongName'])->substr(0, 5) }}</b><span class="specAppSmallTitleOrange">{{ Str::of($page['appLongName'])->substr(5, 11) }}</span></a>
   </div>
   <!-- /.login-logo -->
   <div class="card card-primary  AppConnect">
@@ -97,5 +108,20 @@
 
 
 
+
+@endsection
+
+
+
+
+@section('footer')
+
+<footer class="main-footer">
+    <strong>Copyright &copy; <?= date('Y') ?> <a href="{{$page['appPoweredByWebsite']}}">{{ $page['appPoweredBy'] }}</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> {{ $page['appVersion'] }}
+    </div>
+  </footer>
 
 @endsection

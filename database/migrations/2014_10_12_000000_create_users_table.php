@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->smallInteger('civility')->default(0);
+            $table->smallInteger('civility')->default(3);
             $table->string('name');
             $table->string('firstname')->nullable();
             $table->date('birthday')->nullable();
@@ -24,11 +24,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('photo_url')->nullable();
             $table->smallInteger('status')->default(0);
+            $table->string('zone_1')->nullable();
+            $table->string('zone_2')->nullable();
+            $table->string('zone_3')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
-        }
+     }
 
     /**
      * Reverse the migrations.

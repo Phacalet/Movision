@@ -2,10 +2,22 @@
 
 
 
-@php $page['title']='Paramétrage des Pays/Villes'; $page['module']='Statistiques'; @endphp
-@section('title')
+@php 
+  $page['title']='Paramétrage des Pays/Villes'; 
+  $page['module']='Paramètres'; 
+  $page['imgPath']='dist/img/';
 
-<title> Movision 4.0 | {{$page['title']}} </title>
+  $page['appVersion']='4.0'; 
+  $page['appPoweredBy']='FULL-IT'; 
+  $page['appPoweredByWebsite']="http://full-it.com";
+  $page['appLongName']='MO\'FTVISION'; 
+  $page['appName']='Movision';
+
+
+@endphp
+
+@section('title')
+<title> {{$page['appName'].' '.$page['appVersion']}} | {{$page['title']}} </title>
 @endsection
 
 
@@ -72,7 +84,7 @@
                     <td class="text-center">
 
 
-                      <form class="d-inline" id="formCountryShow" name="formCountryShow">
+                      <form  name="ShowCountry" id="ShowCountry" class="d-inline" id="formCountryShow" name="formCountryShow">
                         <div class="modal fade" id="modal_ShowCountry" tabindex="-1" role="dialog" aria-labelledby="ShowCountryModalLabel" aria-hidden="true">
 
                           <div class="modal-dialog" role="document">
@@ -91,7 +103,7 @@
 
                                   <div class="form-group">
 
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $country->name }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $country->name }}" required autocomplete="name" >
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -104,12 +116,12 @@
                                   <div class="form-group clearfix">
 
                                     <div class="icheck-primary d-inline mr-4">
-                                      <input type="radio" id="status1" value=1 name="status" @if($country->status===1) checked @endif required>
+                                      <input type="radio" id="status1" value=1 name="status" required>
                                       <label for="status1">Actif
                                       </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                      <input type="radio" id="status2" value=0 name="status" @if($country->status===0) checked @endif required>
+                                      <input type="radio" id="status2" value=0 name="status" required>
                                       <label for="status2">Inactif
                                       </label>
                                     </div>
@@ -154,7 +166,7 @@
 
 
 
-                      <form action="{{ route('country.update', $country)}}" method="POST" enctype="multipart/form-data" class="d-inline" id="formCountryEdit" name="formCountryEdit">
+                      <form name="EditCountry" id="EditCountry" action="{{ route('country.update', $country)}}" method="POST" enctype="multipart/form-data" class="d-inline" id="formCountryEdit" name="formCountryEdit">
                         @csrf
                         @method('PATCH')
 
@@ -176,7 +188,7 @@
 
                                   <div class="form-group">
 
-                                    <input id="name" placeholder="Nom du Pays" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $country->name }}" required autocomplete="name" autofocus>
+                                    <input id="name" placeholder="Nom du Pays" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $country->name }}" required autocomplete="name" >
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
@@ -189,12 +201,12 @@
                                   <div class="form-group clearfix">
 
                                     <div class="icheck-primary d-inline mr-4">
-                                      <input type="radio" id="status1" value=1 name="status" required @if($country->status===1) checked @endif >
+                                      <input type="radio" id="status1" value=1 name="status" required >
                                       <label for="status1">Actif
                                       </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                      <input type="radio" id="status2" value=0 name="status" @if($country->status===0) checked @endif >
+                                      <input type="radio" id="status2" value=0 name="status"  >
                                       <label for="status2">Inactif
                                       </label>
                                     </div>
@@ -239,12 +251,12 @@
 
 
 
-                      <form action="{{ route('country.destroy', $country)}}" method="POST" class="d-inline" id="formCountryDelete" name="formCountryDelete">
+                      <form id="DeleteCountry" name="DeleteCountry" action="{{ route('country.destroy', $country)}}" method="POST" class="d-inline" id="formCountryDelete" name="formCountryDelete">
                         @csrf
                         @method('DELETE')
 
 
-                        <button type="submit" alt="Supprimer le pays" class="btn btn-primary btn-xs" onclick="myCountryDeletion()"><i class="fas fa-trash" title="Supprimer"></i></button>
+                        <button type="submit" alt="Supprimer le pays" class="btn btn-primary btn-xs"><i class="fas fa-trash" title="Supprimer"></i></button>
                       </form>
 
                     </td>
@@ -296,14 +308,12 @@
                           <label for="city" class="col-md-4 control-label">Statut :</label>
                           <div class="col-md-12">
                             <div class="icheck-primary d-inline mr-4">
-                              <input type="radio" id="status1" value=1 name="status" required>
-                              <label for="status1">Actif
-                              </label>
+                              <input type="radio" id="status1" value=1 name="status" >
+                              <label for="status1">Actif</label>
                             </div>
                             <div class="icheck-danger d-inline">
-                              <input type="radio" id="status2" value=0 name="status" checked>
-                              <label for="status2">Inactif
-                              </label>
+                              <input type="radio" id="status2" value=0 name="status" >
+                              <label for="status2">Inactif</label>
                             </div>
                             @error('status')
                             <span class="invalid-feedback" role="alert">
@@ -312,25 +322,6 @@
                             @enderror
                           </div>
                         </div>
-                        <!--  
-                        <div>
-                        <p></p>
-                         <center><strong>{{ __('   --------   OU   ---------   ') }}</strong></center> 
-                        </div>
-                     
-
-                 
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="listePays">
-                        <label class="custom-file-label" for="exampleInputFile">Charger une liste...</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Charger</span>
-                      </div> 
-                   
-                   
-                       </div>-->
                       </div>
                       <!-- /.card-body -->
 
@@ -450,7 +441,7 @@
                             <select name="country" id="country" class="form-control">
                               <option>---Choix de ays--</option>
                               @foreach($countries as $country)
-                              <option value="{{ $country->id }}">{{ $country->name }}</option>
+                              <option value="{{ $country->id }}" > {{ $country->name }} </option>
                               @endforeach
                             </select>
                             @error('country')
@@ -464,7 +455,7 @@
                         <div class="form-group">
                           <label for="city" class="col-md-4 control-label">Ville :</label>
                           <div class="col-md-12">
-                            <input id="name" placeholder="Nom de la ville" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <input id="name" placeholder="Nom de la ville" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" >
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
@@ -483,7 +474,7 @@
                               </label>
                             </div>
                             <div class="icheck-danger d-inline">
-                              <input type="radio" id="status2" value=0 name="status" checked>
+                              <input type="radio" id="status2" value=0 name="status">
                               <label for="status2">Inactif
                               </label>
                             </div>
@@ -609,4 +600,19 @@
 
 </section>
 <!-- /.content -->
+@endsection
+
+
+
+
+@section('footer')
+
+<footer class="main-footer">
+    <strong>Copyright &copy; <?= date('Y') ?> <a href="{{$page['appPoweredByWebsite']}}">{{ $page['appPoweredBy'] }}</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> {{ $page['appVersion'] }}
+    </div>
+  </footer>
+
 @endsection

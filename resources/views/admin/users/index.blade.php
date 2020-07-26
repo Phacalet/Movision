@@ -1,10 +1,20 @@
 @extends('layouts.admin')
 
-@php $page['title']='Gestion des utilisateurs'; $page['module']='users';  @endphp
-@section('title')
-  
- <title> Movision 4.0 | {{$page['title']}} </title>
-@endsection
+@php   @endphp
+@php 
+  $page['title']='Liste des comptes utilisateurs'; 
+  $page['module']='Paramètres';
+  $page['imgPath']='dist/img/';
+
+  $page['appVersion']='4.0'; 
+  $page['appPoweredBy']='FULL-IT'; 
+  $page['appPoweredByWebsite']="http://full-it.com";
+  $page['appLongName']='MO\'FTVISION'; 
+  $page['appName']='Movision';
+
+
+@endphp
+
 
 
 @section('content')
@@ -34,7 +44,7 @@
        
         <div class="card col-12">
             <div class="card-header">
-              <h3 class="card-title">Liste des comptes utilisateurs</h3>
+              <h3 class="card-title">{{ $page['title'] }}</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -102,4 +112,16 @@
     </section>
     <!-- /.content -->   
 
+@endsection
+
+
+
+@section('footer')
+<footer class="main-footer">
+    <strong>Copyright &copy; <?= date('Y') ?> <a href="{{$page['appPoweredByWebsite']}}">{{ $page['appPoweredBy'] }}</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> {{ $page['appVersion'] }}
+    </div>
+  </footer>
 @endsection

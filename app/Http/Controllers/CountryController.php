@@ -151,6 +151,6 @@ class CountryController extends Controller
         
        
         $country->delete();
-        return redirect()->back()->with('danger','Suppression effectuée avec succès !');
+        return redirect('country')->with('danger','Suppression effectuée avec succès !');
     }
 }

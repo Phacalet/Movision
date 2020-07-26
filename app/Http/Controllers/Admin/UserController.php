@@ -31,6 +31,7 @@ class UserController extends Controller
     public function index()
     {
         //
+        \Carbon\Carbon::setLocale('fr');
         $users = User::all();
          
         return view('admin.users.index')->with('users',$users);

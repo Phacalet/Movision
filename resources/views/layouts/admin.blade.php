@@ -71,7 +71,21 @@
     <ul class="navbar-nav ml-auto">
 
 
+    <?php
 
+           $userPhoto =  isset(auth()->user()->photo_url) ? auth()->user()->photo_url : 'no-image-icon-hi-1.png' ;
+           $userPicPath="dist/img/";
+           $userPhoto = $userPicPath.$userPhoto;
+           
+           $userLoginName = isset(auth()->user()->name) ? auth()->user()->firtsname.' '.auth()->user()->name : auth()->user()->email;
+           $userPosition = isset(auth()->user()->role) ? auth()->user()->birthday : 'date non définie' ;"Web developer";
+           $userCivility=  isset(auth()->user()->civility) ? auth()->user()->civility : 3 ;         
+           \Carbon\Carbon::setLocale('fr');
+           $userJobStartDate = isset(auth()->user()->created_at) ? auth()->user()->created_at->diffForHumans() : 'date non définie' ;
+           $userDisplayJobStartDate = ($userCivility == 3) ? "Utilisateur créé ".$userJobStartDate : "Utilisatrice créée ".$userJobStartDate;
+           $userBirthdate= isset(auth()->user()->birthday) ? auth()->user()->birthday : 'date non définie' ;
+           
+    ?>
 
      
       
@@ -87,34 +101,22 @@
     <!-- Login panel -->
     <li class="nav-item dropdown user user-menu">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> 
-        <img src="{{{ isset(Auth::user()->photo_url) ? Auth::user()->photo_url : 'dist/img/no-image-icon-hi-1.png' }}}" class="user-image img-circle elevation-2" alt="{{{ isset(Auth::user()->name) ? Auth::user()->firtsname.' '.Auth::user()->name : Auth::user()->email }}}"> 
-      <span class="d-none d-md-block float-right">{{{ isset(Auth::user()->name) ? Auth::user()->firtsname.' '.Auth::user()->name : Auth::user()->email }}}</span> 
+        <img src="{{ asset($userPhoto) }}" class="user-image img-circle elevation-2" alt="{{$userLoginName}}"> 
+      <span class="d-none d-md-block float-right">{{$userLoginName}}</span> 
     </a>
     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <!-- User image -->
       <li class="user-header bg-primary">
-        <img src="{{{ isset(Auth::user()->photo_url) ? Auth::user()->photo_url : 'dist/img/no-image-icon-hi-1.png' }}}" class="img-circle elevation-2" alt="{{{ isset(Auth::user()->name) ? Auth::user()->firtsname.' '.Auth::user()->name : Auth::user()->email }}}">
+        
+        <img src="{{ asset($userPhoto) }}" class="img-circle elevation-2" alt="{{$userLoginName}}">
 
         <p>
-          Hyacinthe AGO - Web Developer
-          <small>Employé depuis Nov. 2012</small>
+        {{$userLoginName}} - {{$userPosition}}
+          <small>{{$userDisplayJobStartDate}}</small>
         </p>
       </li>
       <!-- Menu Body -->
-     <!--  <li class="user-body">
-        <div class="row">
-          <div class="col-6 text-left">
-            <a href="#">N+1: Hyas Phacalet </a>
-          </div>
-          <div class="col-4 text-center">
-            <a href="#">Sales</a>
-          </div>
-          <div class="col-6 text-right">
-            <a href="#">CI/Angré</a>
-          </div>
-        </div>-->
-        <!-- /.row -->
-     <!--  </li> --> 
+  
       <!-- Menu Footer-->
       <li class="user-footer">
         <div class="float-left d-none d-sm-inline">
@@ -151,7 +153,7 @@
     <a href="/" class="brand-link">
       <img src="{{ asset('dist/img/MovisionLogo.png') }}" alt="Movision Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Movision 4.0</span>
+      <span class="brand-text font-weight-light">{{$page['appName'].' '.$page['appVersion']}}</span>
     </a>
     <!-- / Brand Logo -->
 
@@ -174,8 +176,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="{{ route('dashboard1') }}" class="nav-link active">
+          <li class="nav-item has-treeview {{($page['module']=='Statistiques') ? 'menu-open' : ''}} ">
+            <a href="{{ route('dashboard1') }}"  class="nav-link {{($page['module']=='Statistiques') ? 'active' : ''}}" >
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 TABLEAU DE BORD
@@ -184,19 +186,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('dashboard1') }}" class="nav-link active">
+                <a href="{{ route('dashboard1') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'dashboard1') !== false || strpos(\Request::route()->getName(), 'home') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vision globale</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('dashboard2') }}" class="nav-link">
+                <a href="{{ route('dashboard2') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'dashboard2') !== false ) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vision nationale</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('dashboard3') }}" class="nav-link">
+                <a href="{{ route('dashboard3') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'dashboard3') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vision par agence</p>
                 </a>
@@ -204,8 +206,8 @@
             </ul>
           </li>
           
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview  {{($page['module']=='Activités') ? 'menu-open' : ''}}">
+            <a href="{{ route('pos') }}" class="nav-link {{( $page['module']=='Activités') ? 'active' : ''}}" >
             <i class="nav-icon fas fa-th"></i>
               <p>
                 ACTIVIT&Eacute;S
@@ -215,31 +217,31 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('pos') }}" class="nav-link">
+                <a href="{{ route('pos') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'pos') !== false) ? 'active' :'' }}" >
                   <i class="fas fa-home nav-icon"></i>
                   <p>Agence</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('customer') }}" class="nav-link">
+                <a href="{{ route('customer') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'customer') !== false) ? 'active' :'' }}" >
                   <i class="fas fa-users nav-icon"> </i>
                   <p>Client</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('pack') }}" class="nav-link">
+                <a href="{{ route('pack') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'pack') !== false) ? 'active' :'' }}" >
                   <i class="fas fa-cubes nav-icon"></i>
                   <p>Colis</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('shipping') }}" class="nav-link">
+                <a href="{{ route('shipping') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'shipping') !== false) ? 'active' :'' }}" >
                   <i class="fas fa-shipping-fast nav-icon"></i>
                   <p>Livraison</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('message') }}" class="nav-link">
+                <a href="{{ route('message') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'message') !== false) ? 'active' :'' }}" >
                   <i class="fas fa-envelope nav-icon"></i>
                   <p>Message</p>
                 </a>
@@ -247,8 +249,8 @@
             </ul>
           </li>
        
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview {{( $page['module']=='Paramètres') ? 'menu-open' : ''}}">
+            <a href="{{ route('country.index') }}" class="nav-link {{( $page['module']=='Paramètres') ? 'active' : ''}}" >
             <i class="nav-icon fas fa-cogs"></i>
               <p>
                 PARAM&Egrave;TRES
@@ -258,43 +260,43 @@
             </a>
             <ul class="nav nav-treeview">
                <li class="nav-item">
-                <a href="{{ route('country.index') }}" class="nav-link">
+                <a href="{{ route('country.index') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'country') !== false) ? 'active' :'' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pays/ville</p>
                 </a>
               </li>
                <li class="nav-item">
-                <a href="{{ route('admin.users.index') }}" class="nav-link">
+                <a href="{{ route('admin.users.index') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'users') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Utilisateur</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('team') }}" class="nav-link">
+                <a href="{{ route('team') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'team') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Equipe</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('package') }}" class="nav-link">
+                <a href="{{ route('package') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'package') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Type Colis</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('shippingWay') }}" class="nav-link">
+                <a href="{{ route('shippingWay') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'shippingWay') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Type Envoi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('alert') }}" class="nav-link">
+                <a href="{{ route('alert') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'alert') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Notification</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('calendar') }}" class="nav-link">
+                <a href="{{ route('calendar') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'calendar') !== false) ? 'active' :'' }}" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Calendrier Frêt </p>
                 </a>
@@ -303,7 +305,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('help') }}" class="nav-link">
+            <a href="{{ route('help') }}" class="nav-link {{ (strpos(\Request::route()->getName(), 'help') !== false) ? 'active' :'' }}" >
             <i class="nav-icon fas fa-question"></i>
               <p>
                 AIDE ?
@@ -328,13 +330,8 @@
 
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; <?= date('Y') ?> <a href="http://full-it.com">Full-IT</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 4.0
-    </div>
-  </footer>
+  
+  @yield('footer')
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

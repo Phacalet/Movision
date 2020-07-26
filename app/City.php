@@ -8,7 +8,7 @@ use PHPUnit\Framework\Constraint\Count;
 class City extends Model
 {
     //
-    protected $fillable = ['name','country','status'];
+    protected $guarded = [];
 
     public function country(){ 
         return $this->belongsTo(Country::class);

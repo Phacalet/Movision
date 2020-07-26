@@ -1,10 +1,22 @@
 @extends('layouts.admin')
 
 
-@php $page['title']='Tableau de bord'; $page['module']='Statistiques';  @endphp
+@php 
+  $page['title']='Tableau de bord'; 
+  $page['module']='Statistiques'; 
+  $page['imgPath']='dist/img/';
+
+  $page['appVersion']='4.0'; 
+  $page['appPoweredBy']='FULL-IT'; 
+  $page['appPoweredByWebsite']="http://full-it.com";
+  $page['appLongName']='MO\'FTVISION'; 
+  $page['appName']='Movision';
+
+
+@endphp
+
 @section('title')
-  
- <title> Movision 4.0 | {{$page['title']}} </title>
+<title> {{$page['appName'].' '.$page['appVersion']}} | {{$page['title']}} </title>
 @endsection
 
 @include('flash-message')
@@ -409,4 +421,23 @@
   </section>
   <!-- /.content -->
 </div>
+@endsection
+
+
+
+
+
+
+
+
+@section('footer')
+
+<footer class="main-footer">
+    <strong>Copyright &copy; <?= date('Y') ?> <a href="{{$page['appPoweredByWebsite']}}">{{ $page['appPoweredBy'] }}</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> {{ $page['appVersion'] }}
+    </div>
+  </footer>
+
 @endsection

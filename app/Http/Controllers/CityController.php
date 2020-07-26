@@ -95,5 +95,18 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         //
+        DB::beginTransaction();
+
+        $this
+           ->city()
+           ->delete()
+       ;
+   
+       $result = parent::delete();
+   
+       DB::commit();
+   
+       return $result;
+        $city()->delete();
     }
 }

@@ -15,9 +15,6 @@ class CountrySeeder extends Seeder
         //Vider la table 
         Country::truncate();
 
-       // vider ses tables pivots, syntaxe tables sans model 
-        DB::table('cities')->truncate();
-
         //Pays livrés par defaut avec l'application
         /* Le super admin */
         $france= Country::create([
@@ -29,6 +26,15 @@ class CountrySeeder extends Seeder
 
         $ci= Country::create([
             'name'=>'Côte d\'Ivoire',
+            'status'=>1, 
+            'zone_1'=>'App data',
+            'user_id'=>1
+        ]);
+
+
+        
+        $ci= Country::create([
+            'name'=>'Italie',
             'status'=>1, 
             'zone_1'=>'App data',
             'user_id'=>1

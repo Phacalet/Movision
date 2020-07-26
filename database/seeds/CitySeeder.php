@@ -38,5 +38,22 @@ class CitySeeder extends Seeder
             'status'=>1, 
             'zone_1'=>'App data'
         ]);
+
+        $Abidjan= City::create([
+            'country_id'=>2,
+            'user_id'=>1,
+            'name'=>'Bouaké',
+            'status'=>1, 
+            'zone_1'=>'App data'
+        ]);
+
+
+        $Abidjan= City::create([
+            'country_id'=>2,
+            'user_id'=>1,
+            'name'=>'Korogho',
+            'status'=>1, 
+            'zone_1'=>'App data'
+        ]);
     }
 }

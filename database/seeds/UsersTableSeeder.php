@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             'firstname'=>'app',
             'email'=>'admin@full-it.com', 
             'password'=>Hash::make('azerty1234*'),
-            'photo_url' => 'dist/img/user2-160x160.jpg',
+            'photo_url' => 'user2-160x160.jpg',
             'status'=>1 
         ]);
 
